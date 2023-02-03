@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "./static/css/main.7c2de380.css",
-    "main.js": "./static/js/main.432c693c.js",
-    "index.html": "./index.html",
-    "main.7c2de380.css.map": "./static/css/main.7c2de380.css.map",
-    "main.432c693c.js.map": "./static/js/main.432c693c.js.map"
+    "main.css": "/datn-fe-admin/static/css/main.7c2de380.css",
+    "main.js": "/datn-fe-admin/static/js/main.432c693c.js",
+    "index.html": "/datn-fe-admin/index.html",
+    "main.7c2de380.css.map": "/datn-fe-admin/static/css/main.7c2de380.css.map",
+    "main.432c693c.js.map": "/datn-fe-admin/static/js/main.432c693c.js.map"
   },
   "entrypoints": [
     "static/css/main.7c2de380.css",
