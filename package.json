@@ -57,5 +57,5 @@
   "devDependencies": {
     "gh-pages": "^5.0.0"
   },
-  "proxy": "https://datn-hotel-api.onrender.com/api/"
+  "proxy": "https://localhost:8800/api/"
 }
