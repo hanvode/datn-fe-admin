@@ -10,7 +10,7 @@ import { AuthContext } from "../../context/AuthenContext";
 const Single = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const infoUser = useFetch(`/user/${id}`);
+  const infoUser = useFetch(`user/${id}`);
   const navigate = useNavigate();
 
   const { user } = useContext(AuthContext);

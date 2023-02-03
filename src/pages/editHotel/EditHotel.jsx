@@ -12,12 +12,13 @@ import {
   checkRequired,
 } from "../../components/validate/ValidateForm";
 import NotFound from "../notFound/NotFound";
+import { API_URL } from "../../hooks/config";
 
 const EditHotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[3];
   const navigate = useNavigate();
-  const { data } = useFetch(`/hotel/find/${id}`);
+  const { data } = useFetch(`hotel/find/${id}`);
   const [files, setFiles] = useState("");
   const [infoHotel, setInfoHotel] = useState({});
   const [slideNumber, setSlideNumber] = useState(0);
@@ -90,7 +91,7 @@ const EditHotel = () => {
       let inputClassName = "editFormInput";
       if (!checkRequired(inputArr, inputClassName)) {
         if (!checkNumber(e.target.form[7], 5000, inputClassName)) {
-          await axios.put(`/hotel/${id}`, newHotel);
+          await axios.put(`${API_URL}/hotel/${id}`, newHotel);
           navigate(`/hotel/${id}`);
         }
       }

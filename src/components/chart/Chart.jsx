@@ -13,6 +13,7 @@ import { AuthContext } from "../../context/AuthenContext";
 import axios from "axios";
 import useFetch from "../../hooks/useFetch";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import { API_URL } from "../../hooks/config";
 
 // const data = [
 //   { month: "January", count: 120 },
@@ -32,7 +33,7 @@ import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 const Chart = ({ aspect, title, type }) => {
   const [dataChart, setDataChart] = useState([]);
   const { user } = useContext(AuthContext);
-  const { data } = useFetch(`/user/hotel-own/${user._id}`);
+  const { data } = useFetch(`user/hotel-own/${user._id}`);
 
   const [hotelId, setHotelId] = useState(0);
 
@@ -42,7 +43,7 @@ const Chart = ({ aspect, title, type }) => {
 
   useEffect(() => {
     const countCommentByYear = async () => {
-      const res = await axios.get(`/comment/count-by-year/${user._id}`);
+      const res = await axios.get(`${API_URL}/comment/count-by-year/${user._id}`);
       setDataChart(res.data.commentCount[hotelId]);
     };
     if (type === "home") {
@@ -52,7 +53,7 @@ const Chart = ({ aspect, title, type }) => {
   useEffect(() => {
     const countCommentByHotel = async () => {
       if (type !== "home") {
-        const res = await axios.get(`/comment/count-by-hotel/${type}`);
+        const res = await axios.get(`${API_URL}/comment/count-by-hotel/${type}`);
         setDataChart(res.data.commentCount);
       }
     };

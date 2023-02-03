@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL } from "../../hooks/config";
 
 const List = ({ type, id }) => {
   const [list, setList] = useState([]);
@@ -33,19 +34,19 @@ const List = ({ type, id }) => {
   ];
   useEffect(() => {
     const getDataFood = async () => {
-      const res = await axios.get(`/food/own-hotel/${id}`);
+      const res = await axios.get(`${API_URL}/food/own-hotel/${id}`);
       setList(res.data);
     };
     const getListFollowed = async () => {
-      const res = await axios.get(`/user/all-followed/${id}`);
+      const res = await axios.get(`${API_URL}/user/all-followed/${id}`);
       setList(res.data);
     };
     const getAllCommentNewest = async () => {
-      const res = await axios.get(`/comment/own-hotel/${id}`);
+      const res = await axios.get(`${API_URL}/comment/own-hotel/${id}`);
       setList(res.data.comments.flat(Infinity));
     };
     const getAllMyComment = async () => {
-      const res = await axios.get(`/comment/own-comment/${id}`);
+      const res = await axios.get(`${API_URL}/comment/own-comment/${id}`);
       setList(res.data.comments);
     };
     if (type === "food") {

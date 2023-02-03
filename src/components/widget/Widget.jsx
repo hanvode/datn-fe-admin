@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 
 const Widget = ({ type }) => {
   let source;
-  const { data} = useFetch(`/${type}`);
+  const { data} = useFetch(`${type}`);
   //temporary
   // const diff = 20;
 

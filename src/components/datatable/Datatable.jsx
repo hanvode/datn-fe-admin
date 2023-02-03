@@ -9,14 +9,15 @@ import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthenContext";
+import { API_URL } from "../../hooks/config";
 
 const Datatable = ({ columns, isNotAdminPlus }) => {
   const location = useLocation();
   const path = location.pathname.split("/")[1];
   const [list, setList] = useState([]);
   const { user } = useContext(AuthContext);
-  const { data } = useFetch(`/${path}`);
-  const listHotelOwn = useFetch(`/user/hotel-own/${user._id}`);
+  const { data } = useFetch(`${path}`);
+  const listHotelOwn = useFetch(`user/hotel-own/${user._id}`);
 
   useEffect(() => {
     !isNotAdminPlus ? setList(data) : setList(listHotelOwn.data);
@@ -24,7 +25,7 @@ const Datatable = ({ columns, isNotAdminPlus }) => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`/${path}/${id}`);
+      await axios.delete(`${API_URL}/${path}/${id}`);
       setList(list.filter((item) => item._id !== id));
     } catch (error) {
       console.log(error);

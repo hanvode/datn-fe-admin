@@ -12,12 +12,13 @@ import {
   checkNumber,
   checkRequired,
 } from "../../components/validate/ValidateForm";
+import { API_URL } from "../../hooks/config";
 
 const EditFood = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[3];
   const navigate = useNavigate();
-  const { data } = useFetch(`/food/${id}`);
+  const { data } = useFetch(`food/${id}`);
   const [infoFood, setInfoFood] = useState({});
   const [file, setFile] = useState("");
   const [error, setError] = useState("");
@@ -55,7 +56,7 @@ const EditFood = () => {
       let inputClassName = "editFoodFormInput";
       if (!checkRequired(inputArr, inputClassName)) {
         if (!checkNumber(e.target.form[3], 1000, inputClassName)) {
-          await axios.put(`/food/${id}`, newFood);
+          await axios.put(`${API_URL}/food/${id}`, newFood);
           navigate(`/food/${id}`);
         }
       }

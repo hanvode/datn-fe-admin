@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthenContext";
 import NotFound from "../notFound/NotFound";
 import { checkLength, checkRequired } from "../../components/validate/ValidateForm";
+import { API_URL } from "../../hooks/config";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
@@ -47,7 +48,7 @@ const New = ({ inputs, title }) => {
       let inputClassName = "formInput";
       if (!checkRequired(inputArr, inputClassName)) {
         if (!checkLength(e.target.form[4], 4, inputClassName)) {
-      await axios.post("/auth/register", newUser);
+      await axios.post(`${API_URL}/auth/register`, newUser);
       navigate(`/user`);
         }}
     } catch (error) {

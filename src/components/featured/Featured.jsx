@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthenContext";
+import { API_URL } from "../../hooks/config";
 
 const Featured = () => {
   // const startOneDay = new Date(Date.now() - 1 * 24 * 60 * 60 * 1000);
@@ -46,7 +47,7 @@ const Featured = () => {
   useEffect(() => {
     const countComment = async () => {
       const res = await axios.get(
-        `/comment/count-by-time/${user._id}?start=${newDay}&end=${end}`
+        `${API_URL}/comment/count-by-time/${user._id}?start=${newDay}&end=${end}`
       );
       setRToday(res.data.total);
     };
@@ -57,7 +58,7 @@ const Featured = () => {
   useEffect(() => {
     const countComment = async () => {
       const res = await axios.get(
-        `/comment/count-by-time/${user._id}?start=${newYesterDay}&end=${newDay}`
+        `${API_URL}/comment/count-by-time/${user._id}?start=${newYesterDay}&end=${newDay}`
       );
       setRYesday(res.data.total);
     };
@@ -68,7 +69,7 @@ const Featured = () => {
   useEffect(() => {
     const countComment = async () => {
       const res = await axios.get(
-        `/comment/count-by-time/${user._id}?start=${newLastWeek}&end=${end}`
+        `${API_URL}/comment/count-by-time/${user._id}?start=${newLastWeek}&end=${end}`
       );
       setRLastWeek(res.data.total);
     };
@@ -79,7 +80,7 @@ const Featured = () => {
   useEffect(() => {
     const countComment = async () => {
       const res = await axios.get(
-        `/comment/count-by-time/${user._id}?start=${newLastTwoWeek}&end=${newLastWeek}`
+        `${API_URL}/comment/count-by-time/${user._id}?start=${newLastTwoWeek}&end=${newLastWeek}`
       );
       setRLast2Week(res.data.total);
     };

@@ -12,6 +12,7 @@ import {
   checkLength,
   checkRequired,
 } from "../../components/validate/ValidateForm";
+import { API_URL } from "../../hooks/config";
 
 // import { FontAwesomeIcon } from "@fontawesome/react-fontawesome";
 // import { faUpload } from "@fontawesome/free-solid-svg-icons";
@@ -20,7 +21,7 @@ const Edit = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[3];
   const navigate = useNavigate();
-  const { data } = useFetch(`/user/${id}`);
+  const { data } = useFetch(`user/${id}`);
   const [info, setInfo] = useState({});
   const [file, setFile] = useState("");
   const { user, dispatch } = useContext(AuthContext);
@@ -63,7 +64,7 @@ const Edit = () => {
       let inputClassName = "editFormInput";
       if (!checkRequired(inputArr, inputClassName)) {
         if (!checkLength(e.target.form[4], 4, inputClassName)) {
-          const res = await axios.put(`/user/${id}`, newUser);
+          const res = await axios.put(`${API_URL}/user/${id}`, newUser);
           dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
 
           navigate(`/user/${id}`);

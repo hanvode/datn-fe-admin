@@ -8,6 +8,7 @@ import { hotelInputs } from "../../formSource";
 import { AuthContext } from "../../context/AuthenContext";
 import { useNavigate } from "react-router-dom";
 import { checkNumber, checkRequired } from "../../components/validate/ValidateForm";
+import { API_URL } from "../../hooks/config";
 
 const NewHotel = () => {
   const [files, setFiles] = useState("");
@@ -71,7 +72,7 @@ const NewHotel = () => {
       let inputClassName = "formInput";
       if (!checkRequired(inputArr, inputClassName)) {
         if (!checkNumber(e.target.form[7],5000,inputClassName)) {
-      await axios.post("/hotel", newHotel);
+      await axios.post(`${API_URL}/hotel`, newHotel);
       navigate(`/hotel`);
         }}
     } catch (error) {

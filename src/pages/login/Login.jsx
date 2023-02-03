@@ -6,6 +6,7 @@ import { AuthContext } from "../../context/AuthenContext.js";
 import "./login.scss";
 import {ToastContainer , toast} from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import { API_URL } from "../../hooks/config.js";
 
 const Login = () => {
   const [credentials, setCredentials] = useState({
@@ -24,7 +25,7 @@ const Login = () => {
     e.preventDefault();
     dispatch({ type: "LOGIN_START" });
     try {
-      const res = await axios.post("/auth/login", credentials);
+      const res = await axios.post(`${API_URL}/auth/login`, credentials);
       if (res.data.details.isAdmin) {
         dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
         navigate("/");

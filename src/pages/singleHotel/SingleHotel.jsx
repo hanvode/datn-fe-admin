@@ -9,14 +9,15 @@ import { DataGrid } from "@mui/x-data-grid";
 import { foodColumns } from "../../datatablesource";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthenContext";
+import { API_URL } from "../../hooks/config";
 
 const SingleHotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
   const [slideNumber, setSlideNumber] = useState(0);
-  const infoHotel = useFetch(`/hotel/find/${id}`);
-  const menu = useFetch(`/hotel/menu/${id}`);
-  const allFood = useFetch(`/food`);
+  const infoHotel = useFetch(`hotel/find/${id}`);
+  const menu = useFetch(`hotel/menu/${id}`);
+  const allFood = useFetch(`food`);
   const navigate = useNavigate();
   const [listMenu, setListMenu] = useState([]);
   const [listFood, setListFood] = useState([]);
@@ -61,7 +62,7 @@ const SingleHotel = () => {
       return obj;
     });
     try {
-      await axios.put(`/hotel/update-menu/${id}`, updateMenu);
+      await axios.put(`${API_URL}/hotel/update-menu/${id}`, updateMenu);
     } catch (error) {
       console.log(error);
     }

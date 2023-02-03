@@ -8,7 +8,7 @@ import useFetch from "../../hooks/useFetch";
 const SingleFood = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const infoFood = useFetch(`/food/${id}`);
+  const infoFood = useFetch(`food/${id}`);
   const navigate = useNavigate();
   // console.log(infoFood);
   return (
