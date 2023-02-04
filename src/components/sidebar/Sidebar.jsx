@@ -12,13 +12,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { DarkModeContext } from "../../context/darkModeContext";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthenContext";
+import axios from "axios";
+import { API_URL } from "../../hooks/config";
 
 const Sidebar = () => {
   const { dispatch } = useContext(DarkModeContext);
   const userContext = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await axios.post(`${API_URL}/auth/logout`)
     userContext.dispatch({ type: "LOGOUT" });
     navigate("/login");
   };
