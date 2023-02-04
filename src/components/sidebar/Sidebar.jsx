@@ -21,7 +21,7 @@ const Sidebar = () => {
   const navigate = useNavigate();
 
   const handleLogout = async () => {
-    await axios.post(`${API_URL}/auth/logoutAdmin`)
+    await axios.post(`${API_URL}/auth/logout`)
     userContext.dispatch({ type: "LOGOUT" });
     navigate("/login");
   };
