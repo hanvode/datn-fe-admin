@@ -35,12 +35,12 @@ const Featured = () => {
 
   const increaseLWeek =
     rLast2Week > 0
-      ? `${((rLastWeek - rLast2Week) / rLast2Week) * 100} %)`
+      ? `${((rLastWeek - rLast2Week) / rLast2Week).toFixed(4) * 100} %)`
       : `${rLastWeek - rLast2Week} )`;
 
   const increaseYTD =
     rYesday > 0
-      ? `${((rToday - rYesday) / rYesday) * 100} %)`
+      ? `${((rToday - rYesday) / rYesday).toFixed(4) * 100} %)`
       : `${rToday - rYesday} )`;
 
   //count review today
