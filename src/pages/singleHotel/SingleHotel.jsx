@@ -99,7 +99,7 @@ const SingleHotel = () => {
         ) : (
           <div className="top">
             <div className="left">
-              {isOwnHotel && (
+              {(isOwnHotel || user?.isAdminPlus) && (
                 <div
                   className="editButton"
                   onClick={() => navigate(`/hotel/edit/${id}`)}
