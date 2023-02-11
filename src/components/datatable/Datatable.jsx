@@ -62,6 +62,7 @@ const Datatable = ({ columns, isNotAdminPlus }) => {
                   >
                     {" "}
                     Delete
+                    {path === "hotel" && params.row.featured ? ` special` : ""}
                   </button>
                 }
                 modal
