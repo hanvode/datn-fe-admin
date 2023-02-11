@@ -229,15 +229,17 @@ const EditHotel = () => {
                     </div>
                   ))}
                 </div>
-                <div className="editFormInput noBorder">
-                  <label>Featured</label>
-                  <select id="featured" onChange={handleChange}>
-                    <option value={false}>No</option>
-                    <option value={true} selected={infoHotel?.featured}>
-                      Yes
-                    </option>
-                  </select>
-                </div>
+                {user?.isAdminPlus && (
+                  <div className="editFormInput noBorder">
+                    <label>Featured</label>
+                    <select id="featured" onChange={handleChange}>
+                      <option value={false}>No</option>
+                      <option value={true} selected={infoHotel?.featured}>
+                        Yes
+                      </option>
+                    </select>
+                  </div>
+                )}
                 <button onClick={handleClick}>Update</button>
               </form>
             </div>

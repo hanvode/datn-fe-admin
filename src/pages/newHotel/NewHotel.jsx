@@ -7,14 +7,17 @@ import axios from "axios";
 import { hotelInputs } from "../../formSource";
 import { AuthContext } from "../../context/AuthenContext";
 import { useNavigate } from "react-router-dom";
-import { checkNumber, checkRequired } from "../../components/validate/ValidateForm";
+import {
+  checkNumber,
+  checkRequired,
+} from "../../components/validate/ValidateForm";
 import { API_URL } from "../../hooks/config";
 
 const NewHotel = () => {
   const [files, setFiles] = useState("");
   const [infoHotel, setInfoHotel] = useState({});
   const [filterGenre, setFilterGenre] = useState([]);
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
   const { user } = useContext(AuthContext);
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -71,12 +74,13 @@ const NewHotel = () => {
       ];
       let inputClassName = "formInput";
       if (!checkRequired(inputArr, inputClassName)) {
-        if (!checkNumber(e.target.form[7],5000,inputClassName)) {
-      await axios.post(`${API_URL}/hotel`, newHotel);
-      navigate(`/hotel`);
-        }}
+        if (!checkNumber(e.target.form[7], 5000, inputClassName)) {
+          await axios.post(`${API_URL}/hotel`, newHotel);
+          navigate(`/hotel`);
+        }
+      }
     } catch (error) {
-      setError(error.response.data.message)
+      setError(error.response.data.message);
     }
   };
 
@@ -141,13 +145,15 @@ const NewHotel = () => {
                   </div>
                 ))}
               </div>
-              <div className="formInput noBorder">
-                <label>Featured</label>
-                <select id="featured" onChange={handleChange}>
-                  <option value={false}>No</option>
-                  <option value={true}>Yes</option>
-                </select>
-              </div>
+              {user?.isAdminPlus && (
+                <div className="formInput noBorder">
+                  <label>Featured</label>
+                  <select id="featured" onChange={handleChange}>
+                    <option value={false}>No</option>
+                    <option value={true}>Yes</option>
+                  </select>
+                </div>
+              )}
               <button onClick={handleClick}>Send</button>
             </form>
             {error && <p className="reError">{error}</p>}
