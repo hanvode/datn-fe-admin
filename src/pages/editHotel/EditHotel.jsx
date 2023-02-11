@@ -222,7 +222,7 @@ const EditHotel = () => {
                       <input
                         type="checkbox"
                         value={genre}
-                        defaultChecked={infoHotel?.genre.includes(genre)}
+                        defaultChecked={infoHotel?.genre?.includes(genre)}
                         onChange={handleCheckBox}
                         className="genreInput"
                       />
