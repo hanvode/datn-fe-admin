@@ -108,7 +108,7 @@ const EditHotel = () => {
         <div className="top">
           <h1>Update Hotel</h1>
         </div>
-        {isHotelOwn ? (
+        {isHotelOwn || user?.isAdminPlus ? (
           <div className="bottom">
             <div className="left">
               {infoHotel.photos?.map(
