@@ -109,7 +109,7 @@ const List = ({ type, id }) => {
                   <span className={`status Approved`}>
                     {item.numReviews === 0
                       ? 0
-                      : item?.rating / item?.numReviews}
+                      : (item?.rating / item?.numReviews).toFixed(2)}
                   </span>
                 </TableCell>
               </TableRow>
