@@ -56,14 +56,21 @@ const NewFood = () => {
           img: url,
         };
       }
-      axios.defaults.withCredentials = true;
       let inputArr = [e.target.form[1], e.target.form[2], e.target.form[3]];
       let inputClassName = "formInput";
-      if (!checkRequired(inputArr, inputClassName)) {
-        if (!checkNumber(e.target.form[3], 1000, inputClassName)) {
-          await axios.post(`${API_URL}/food`, newFood);
-          navigate(`/food`);
+      try {
+        if (!checkRequired(inputArr, inputClassName)) {
+          if (!checkNumber(e.target.form[3], 1000, inputClassName)) {
+            console.log("first");
+            axios.defaults.withCredentials = true;
+            console.log("second");
+            await axios.post(`${API_URL}/food`, newFood);
+            console.log("third");
+            navigate(`/food`);
+          }
         }
+      } catch (error) {
+        setError(error.response.data.message);
       }
     } catch (error) {
       setError(error.response.data.message);
