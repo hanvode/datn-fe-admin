@@ -68,13 +68,13 @@ const Chart = ({ aspect, title, type }) => {
           <span>
             <Box sx={{ minWidth: 120 }}>
               <FormControl fullWidth>
-                <InputLabel id="demo-simple-select-label">Hotel</InputLabel>
+                <InputLabel id="demo-simple-select-label">Diner</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   value={hotelId}
                   defaultValue={0}
-                  label="Choose Hotel"
+                  label="Choose Diner"
                   onChange={handleSelectHotel}
                 >
                   {data?.map((item, index) => (

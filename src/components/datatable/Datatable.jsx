@@ -161,7 +161,7 @@ const Datatable = ({ columns, isNotAdminPlus }) => {
   return (
     <div className="datatable">
       <div className="datatableTitle">
-        List {path}
+        List {path === "hotel" ? `diners` : path}
         {path !== "comment" && (
           <Link to={`/${path}/new`} className="link">
             Add New

@@ -90,7 +90,7 @@ const Featured = () => {
   return (
     <div className="featured">
       <div className="top">
-        <h1 className="title">Total Reviews On Your Own Hotel</h1>
+        <h1 className="title">Total Reviews On Your Own Diner</h1>
         <MoreVertIcon fontSize="small" />
       </div>
       <div className="bottom">

@@ -107,7 +107,7 @@ const SingleHotel = () => {
                   Edit
                 </div>
               )}
-              <h1 className="title">Hotel Information</h1>
+              <h1 className="title">Diner Information</h1>
               <div className="item" onClick={() => handleMove("l")}>
                 {infoHotel.data.photos?.map(
                   (photo, index) =>

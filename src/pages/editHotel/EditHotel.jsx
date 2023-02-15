@@ -112,7 +112,7 @@ const EditHotel = () => {
       <div className="editHotelContainer">
         <Navbar />
         <div className="top">
-          <h1>Update Hotel</h1>
+          <h1>Update Diner</h1>
         </div>
         {isHotelOwn || user?.isAdminPlus ? (
           <div className="bottom">
@@ -155,7 +155,7 @@ const EditHotel = () => {
                   <small></small>
                 </div>
                 <div className="editFormInput">
-                  <label>City</label>
+                  <label>District</label>
                   <input
                     onChange={handleChange}
                     type="text"

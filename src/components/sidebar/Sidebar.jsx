@@ -52,7 +52,7 @@ const Sidebar = () => {
           <Link to="/hotel" style={{ textDecoration: "none" }}>
             <li>
               <StoreIcon className="icon" />
-              <span>Hotels</span>
+              <span>Diners</span>
             </li>
           </Link>
           <Link to="/food" style={{ textDecoration: "none" }}>

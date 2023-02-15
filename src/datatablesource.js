@@ -76,12 +76,12 @@ export const hotelColumns = [
   },
   {
     field: "city",
-    headerName: "City",
+    headerName: "District",
     width: 150,
   },
 ];
 export const reviewColumns = [
-  { field: "hotelId", headerName: "HotelID", width: 250 },
+  { field: "hotelId", headerName: "DinerID", width: 250 },
   {
     field: "username",
     headerName: "Name",

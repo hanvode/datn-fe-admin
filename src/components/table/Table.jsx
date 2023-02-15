@@ -20,7 +20,7 @@ const List = ({ type, id }) => {
     "Genre",
     "Title",
     "Address",
-    "City",
+    "District",
     "Rating",
   ];
   const commentCell = [
