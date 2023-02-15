@@ -63,13 +63,18 @@ const Edit = () => {
         e.target.form[5],
       ];
       let inputClassName = "editFormInput";
-      if (!checkRequired(inputArr, inputClassName)) {
-        if (!checkLength(e.target.form[4], 4, inputClassName)) {
-          const res = await axios.put(`${API_URL}/user/${id}`, newUser);
-          dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
+      try {
+        if (!checkRequired(inputArr, inputClassName)) {
+          if (!checkLength(e.target.form[4], 4, inputClassName)) {
+            axios.defaults.withCredentials = true;
+            const res = await axios.put(`${API_URL}/user/${id}`, newUser);
+            dispatch({ type: "LOGIN_SUCCESS", payload: res.data.details });
 
-          navigate(`/user/${id}`);
+            navigate(`/user/${id}`);
+          }
         }
+      } catch (error) {
+        console.log(error);
       }
     } catch (error) {
       console.log(error);

@@ -33,7 +33,6 @@ const New = ({ inputs, title }) => {
       };
       if (file !== "") {
         axios.defaults.withCredentials = false;
-
         const uploadRes = await axios.post(
           "https://api.cloudinary.com/v1_1/dnykvbriw/image/upload",
           data
@@ -51,11 +50,16 @@ const New = ({ inputs, title }) => {
         e.target.form[5],
       ];
       let inputClassName = "formInput";
-      if (!checkRequired(inputArr, inputClassName)) {
-        if (!checkLength(e.target.form[4], 4, inputClassName)) {
-          await axios.post(`${API_URL}/auth/register`, newUser);
-          navigate(`/user`);
+      try {
+        axios.defaults.withCredentials = true;
+        if (!checkRequired(inputArr, inputClassName)) {
+          if (!checkLength(e.target.form[4], 4, inputClassName)) {
+            await axios.post(`${API_URL}/auth/register`, newUser);
+            navigate(`/user`);
+          }
         }
+      } catch (error) {
+        setError(error.response.data.message);
       }
     } catch (error) {
       setError(error.response.data.message);

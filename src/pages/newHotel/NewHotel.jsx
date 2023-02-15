@@ -49,7 +49,6 @@ const NewHotel = () => {
             data.append("file", file);
             data.append("upload_preset", "upload");
             axios.defaults.withCredentials = false;
-
             const uploadRes = await axios.post(
               "https://api.cloudinary.com/v1_1/dnykvbriw/image/upload",
               data
@@ -75,11 +74,16 @@ const NewHotel = () => {
         e.target.form[7],
       ];
       let inputClassName = "formInput";
-      if (!checkRequired(inputArr, inputClassName)) {
-        if (!checkNumber(e.target.form[7], 5000, inputClassName)) {
-          await axios.post(`${API_URL}/hotel`, newHotel);
-          navigate(`/hotel`);
+      try {
+        axios.defaults.withCredentials = true;
+        if (!checkRequired(inputArr, inputClassName)) {
+          if (!checkNumber(e.target.form[7], 5000, inputClassName)) {
+            await axios.post(`${API_URL}/hotel`, newHotel);
+            navigate(`/hotel`);
+          }
         }
+      } catch (error) {
+        setError(error.response.data.message);
       }
     } catch (error) {
       setError(error.response.data.message);

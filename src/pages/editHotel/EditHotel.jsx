@@ -90,11 +90,16 @@ const EditHotel = () => {
         e.target.form[7],
       ];
       let inputClassName = "editFormInput";
-      if (!checkRequired(inputArr, inputClassName)) {
-        if (!checkNumber(e.target.form[7], 5000, inputClassName)) {
-          await axios.put(`${API_URL}/hotel/${id}`, newHotel);
-          navigate(`/hotel/${id}`);
+      try {
+        axios.defaults.withCredentials = true;
+        if (!checkRequired(inputArr, inputClassName)) {
+          if (!checkNumber(e.target.form[7], 5000, inputClassName)) {
+            await axios.put(`${API_URL}/hotel/${id}`, newHotel);
+            navigate(`/hotel/${id}`);
+          }
         }
+      } catch (error) {
+        console.log(error);
       }
     } catch (error) {
       console.log(error);

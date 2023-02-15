@@ -55,11 +55,16 @@ const EditFood = () => {
       }
       let inputArr = [e.target.form[1], e.target.form[2], e.target.form[3]];
       let inputClassName = "editFoodFormInput";
-      if (!checkRequired(inputArr, inputClassName)) {
-        if (!checkNumber(e.target.form[3], 1000, inputClassName)) {
-          await axios.put(`${API_URL}/food/${id}`, newFood);
-          navigate(`/food/${id}`);
+      try {
+        axios.defaults.withCredentials = true;
+        if (!checkRequired(inputArr, inputClassName)) {
+          if (!checkNumber(e.target.form[3], 1000, inputClassName)) {
+            await axios.put(`${API_URL}/food/${id}`, newFood);
+            navigate(`/food/${id}`);
+          }
         }
+      } catch (error) {
+        setError(error.response.data.message);
       }
     } catch (error) {
       setError(error.response.data.message);

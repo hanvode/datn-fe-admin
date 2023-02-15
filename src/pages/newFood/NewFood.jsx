@@ -61,11 +61,8 @@ const NewFood = () => {
       try {
         if (!checkRequired(inputArr, inputClassName)) {
           if (!checkNumber(e.target.form[3], 1000, inputClassName)) {
-            console.log("first");
             axios.defaults.withCredentials = true;
-            console.log("second");
             await axios.post(`${API_URL}/food`, newFood);
-            console.log("third");
             navigate(`/food`);
           }
         }
