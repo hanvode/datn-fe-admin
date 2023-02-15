@@ -56,6 +56,7 @@ const NewFood = () => {
           img: url,
         };
       }
+      axios.defaults.withCredentials = true;
       let inputArr = [e.target.form[1], e.target.form[2], e.target.form[3]];
       let inputClassName = "formInput";
       if (!checkRequired(inputArr, inputClassName)) {
