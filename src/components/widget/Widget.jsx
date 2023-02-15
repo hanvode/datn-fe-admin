@@ -6,10 +6,13 @@ import FastfoodIcon from "@mui/icons-material/Fastfood";
 import CommentIcon from "@mui/icons-material/Comment";
 import useFetch from "../../hooks/useFetch";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthenContext";
 
 const Widget = ({ type }) => {
+  const { user } = useContext(AuthContext);
   let source;
-  const { data} = useFetch(`${type}`);
+  const { data } = useFetch(`${type}`);
   //temporary
   // const diff = 20;
 
@@ -17,7 +20,6 @@ const Widget = ({ type }) => {
     case "user":
       source = {
         title: "USERS",
-        isMoney: false,
         link: "See all users",
         icon: (
           <PersonOutlinedIcon
@@ -32,9 +34,8 @@ const Widget = ({ type }) => {
       break;
     case "hotel":
       source = {
-        title: "HOTELS",
-        isMoney: false,
-        link: "View all hotels",
+        title: "DINERS",
+        link: "View all diners",
         icon: (
           <StoreIcon
             className="icon"
@@ -49,7 +50,6 @@ const Widget = ({ type }) => {
     case "food":
       source = {
         title: "FOODS",
-        isMoney: false,
         link: "View all foods",
         icon: (
           <FastfoodIcon
@@ -62,7 +62,6 @@ const Widget = ({ type }) => {
     case "comment":
       source = {
         title: "REVIEWS",
-        isMoney: false,
         link: "See details",
         icon: (
           <CommentIcon
@@ -84,7 +83,11 @@ const Widget = ({ type }) => {
       <div className="left">
         <span className="title">{source.title}</span>
         <span className="counter">
-          {source.isMoney && "$"} {data.length}
+          {type === "hotel"
+            ? !user.isAdminPlus
+              ? user.hotelOwn.length
+              : data.length
+            : data.length}
         </span>
         <Link to={`/${type}`} className="link">
           {source.link}
