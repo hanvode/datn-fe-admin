@@ -7,14 +7,17 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { AuthContext } from "../../context/AuthenContext";
 import NotFound from "../notFound/NotFound";
-import { checkLength, checkRequired } from "../../components/validate/ValidateForm";
+import {
+  checkLength,
+  checkRequired,
+} from "../../components/validate/ValidateForm";
 import { API_URL } from "../../hooks/config";
 
 const New = ({ inputs, title }) => {
   const [file, setFile] = useState("");
   const [info, setInfo] = useState({});
   const { user } = useContext(AuthContext);
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
   const navigate = useNavigate();
   const handleChange = (e) => {
     setInfo((prev) => ({ ...prev, [e.target.id]: e.target.value }));
@@ -29,6 +32,8 @@ const New = ({ inputs, title }) => {
         ...info,
       };
       if (file !== "") {
+        axios.defaults.withCredentials = false;
+
         const uploadRes = await axios.post(
           "https://api.cloudinary.com/v1_1/dnykvbriw/image/upload",
           data
@@ -48,11 +53,12 @@ const New = ({ inputs, title }) => {
       let inputClassName = "formInput";
       if (!checkRequired(inputArr, inputClassName)) {
         if (!checkLength(e.target.form[4], 4, inputClassName)) {
-      await axios.post(`${API_URL}/auth/register`, newUser);
-      navigate(`/user`);
-        }}
+          await axios.post(`${API_URL}/auth/register`, newUser);
+          navigate(`/user`);
+        }
+      }
     } catch (error) {
-      setError(error.response.data.message)
+      setError(error.response.data.message);
     }
   };
   return (
@@ -113,8 +119,7 @@ const New = ({ inputs, title }) => {
                 </div>
                 <button onClick={handleClick}>Send</button>
               </form>
-            {error && <p className="reError">{error}</p>}
-
+              {error && <p className="reError">{error}</p>}
             </div>
           </div>
         ) : (

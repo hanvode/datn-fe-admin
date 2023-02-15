@@ -66,6 +66,7 @@ const EditHotel = () => {
             const data = new FormData();
             data.append("file", file);
             data.append("upload_preset", "upload");
+            axios.defaults.withCredentials = false;
             const uploadRes = await axios.post(
               "https://api.cloudinary.com/v1_1/dnykvbriw/image/upload",
               data

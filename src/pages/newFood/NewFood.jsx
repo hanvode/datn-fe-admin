@@ -44,6 +44,7 @@ const NewFood = () => {
         hotelId,
       };
       if (file !== "") {
+        axios.defaults.withCredentials = false;
         const uploadRes = await axios.post(
           "https://api.cloudinary.com/v1_1/dnykvbriw/image/upload",
           data
