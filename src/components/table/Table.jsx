@@ -24,7 +24,7 @@ const List = ({ type, id }) => {
     "Rating",
   ];
   const commentCell = [
-    "HotelID",
+    "DinerID",
     "Name",
     "Content",
     "Rating",
