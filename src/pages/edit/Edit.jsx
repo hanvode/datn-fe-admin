@@ -173,15 +173,17 @@ const Edit = () => {
                   <span></span>
                   <small></small>
                 </div>
-                <div className="editFormInput noBorder">
-                  <label>IsAdmin</label>
-                  <select id="isAdmin" onChange={handleChange}>
-                    <option value={false}>No</option>
-                    <option value={true} selected={info.isAdmin}>
-                      Yes
-                    </option>
-                  </select>
-                </div>
+                {user?.isAdminPlus && (
+                  <div className="editFormInput noBorder">
+                    <label>IsAdmin</label>
+                    <select id="isAdmin" onChange={handleChange}>
+                      <option value={false}>No</option>
+                      <option value={true} selected={info.isAdmin}>
+                        Yes
+                      </option>
+                    </select>
+                  </div>
+                )}
                 <button onClick={handleClick} className="editButton">
                   Update
                 </button>
