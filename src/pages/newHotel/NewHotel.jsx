@@ -153,7 +153,7 @@ const NewHotel = () => {
               </div>
               {user?.isAdminPlus && (
                 <div className="formInput noBorder">
-                  <label>Featured</label>
+                  <label>Special</label>
                   <select id="featured" onChange={handleChange}>
                     <option value={false}>No</option>
                     <option value={true}>Yes</option>
