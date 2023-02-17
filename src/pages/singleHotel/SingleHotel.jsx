@@ -10,6 +10,8 @@ import { foodColumns } from "../../datatablesource";
 import axios from "axios";
 import { AuthContext } from "../../context/AuthenContext";
 import { API_URL } from "../../hooks/config";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const SingleHotel = () => {
   const location = useLocation();
@@ -63,6 +65,7 @@ const SingleHotel = () => {
     });
     try {
       await axios.put(`${API_URL}/hotel/update-menu/${id}`, updateMenu);
+      toast.success("Update Menu Successfully!!!")
     } catch (error) {
       console.log(error);
     }
@@ -172,9 +175,12 @@ const SingleHotel = () => {
           <div className="titleMenu">
             <h1 className="title">MENU</h1>
             {isOwnHotel && (
-              <button className="saveMenu" onClick={handleClick}>
-                SAVE
-              </button>
+              <>
+                <button className="saveMenu" onClick={handleClick}>
+                  SAVE
+                </button>
+                <ToastContainer />
+              </>
             )}
           </div>
           <DataGrid
