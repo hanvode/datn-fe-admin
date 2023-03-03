@@ -15,21 +15,17 @@ import useFetch from "../../hooks/useFetch";
 import { Box, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import { API_URL } from "../../hooks/config";
 
-// const data = [
-//   { month: "January", count: 120 },
-//   { month: "February", count: 210 },
-//   { month: "March", count: 80 },
-//   { month: "April", count: 160 },
-//   { month: "May", count: 90 },
-//   { month: "June", count: 170 },
-//   { month: "July", count: 120 },
-//   { month: "August", count: 210 },
-//   { month: "September", count: 80 },
-//   { month: "October", count: 160 },
-//   { month: "November", count: 90 },
-//   { month: "December", count: 170 },
-// ];
-// month : NameHotel, count:
+
+function sortByMonth(arr) {
+  const months = ["January", "February", "March", "April", "May", "June",
+  	        "July", "August", "September", "October", "November", "December"];
+  arr.sort(function(a, b){
+      return months.indexOf(a.month)
+           - months.indexOf(b.month);
+  });
+}
+
+
 const Chart = ({ aspect, title, type }) => {
   const [dataChart, setDataChart] = useState([]);
   const { user } = useContext(AuthContext);
@@ -43,7 +39,10 @@ const Chart = ({ aspect, title, type }) => {
 
   useEffect(() => {
     const countCommentByYear = async () => {
-      const res = await axios.get(`${API_URL}/comment/count-by-year/${user._id}`);
+      const res = await axios.get(
+        `${API_URL}/comment/count-by-year/${user._id}`
+      );
+      sortByMonth(res.data.commentCount[hotelId])
       setDataChart(res.data.commentCount[hotelId]);
     };
     if (type === "home") {
@@ -53,7 +52,9 @@ const Chart = ({ aspect, title, type }) => {
   useEffect(() => {
     const countCommentByHotel = async () => {
       if (type !== "home") {
-        const res = await axios.get(`${API_URL}/comment/count-by-hotel/${type}`);
+        const res = await axios.get(
+          `${API_URL}/comment/count-by-hotel/${type}`
+        );
         setDataChart(res.data.commentCount);
       }
     };
