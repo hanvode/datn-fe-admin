@@ -12,7 +12,7 @@ import { AuthContext } from "./context/AuthenContext";
 import { hotelColumns, foodColumns, userColumns, reviewColumns } from "./datatablesource";
 import NewHotel from "./pages/newHotel/NewHotel";
 import Edit from "./pages/edit/Edit";
-import SingleHotel from "./pages/singleHotel/SingleHotel";
+import SingleHotel from "./pages/singleDiner/SingleHotel";
 import EditHotel from "./pages/editHotel/EditHotel";
 import SingleFood from "./pages/single/SingleFood";
 import NewFood from "./pages/newFood/NewFood";
