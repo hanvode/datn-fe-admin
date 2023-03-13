@@ -12,6 +12,9 @@ import { AuthContext } from "../../context/AuthenContext";
 import { API_URL } from "../../hooks/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { io } from "socket.io-client";
+
+const ENDPOINT = "https://datn-comment-realtime.onrender.com/";
 
 const SingleHotel = () => {
   const location = useLocation();
@@ -25,6 +28,8 @@ const SingleHotel = () => {
   const [listFood, setListFood] = useState([]);
   const { user } = useContext(AuthContext);
   const isOwnHotel = user.hotelOwn.includes(infoHotel.data._id);
+  const [socket, setSocket] = useState(null);
+
   // console.log(infoHotel.data)
   useEffect(() => {
     setListMenu(menu.data);
@@ -35,6 +40,16 @@ const SingleHotel = () => {
     );
     setListFood(raw);
   }, [allFood.data, menu.data]);
+
+  useEffect(() => {
+    setSocket(io(ENDPOINT));
+  }, []);
+
+  useEffect(() => {
+    if (socket) {
+      socket.emit("joinRoom", id);
+    }
+  }, [socket, id]);
 
   const handleMove = (direction) => {
     let newSlideNumber;
@@ -65,7 +80,17 @@ const SingleHotel = () => {
     });
     try {
       await axios.put(`${API_URL}/hotel/update-menu/${id}`, updateMenu);
-      toast.success("Update Menu Successfully!!!")
+      toast.success("Update Menu Successfully!!!");
+      let createdAt = new Date().toISOString();
+      socket.emit("updateMenu", {
+        content: `${infoHotel.data.name} update new menu`,
+        followOwnerId: infoHotel.data.followers,
+        createdAt,
+      });
+      await axios.post(`${API_URL}/user/notification`, {
+        content: `${infoHotel.data.name} update new menu`,
+        followOwnerId: infoHotel.data.followers,
+      });
     } catch (error) {
       console.log(error);
     }
@@ -141,12 +166,12 @@ const SingleHotel = () => {
                       ))}
                     </span>
                   </div>
-                  <div className="detailItem">
+                  {/* <div className="detailItem">
                     <span className="itemKey">Distance:</span>
                     <span className="itemValue">
                       {infoHotel.data?.distance} m
                     </span>
-                  </div>
+                  </div> */}
                   <div className="detailItem">
                     <span className="itemKey">Cheapest Price:</span>
                     <span className="itemValue">
@@ -164,7 +189,7 @@ const SingleHotel = () => {
             </div>
             <div className="right">
               <Chart
-                title="User Spending ( Last 6 Months)"
+                title="Last 12 Months (Reviews)"
                 aspect={3 / 1}
                 type={id}
               />

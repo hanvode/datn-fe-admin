@@ -66,6 +66,32 @@
           right: -5px;
         }
       }
+      .notifications {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        background-color: white;
+        border: 1px solid #555;
+        color: black;
+        font-weight: 300;
+        display: flex;
+        flex-direction: column;
+        padding: 10px;
+        z-index: 3;
+
+
+        .notification {
+          padding: 5px;
+          font-size: 14px;
+        }
+        
+        .nButton {
+          width: 80%;
+          padding: 5px;
+          margin-top: 10px;
+          z-index: 3;
+        }
+      }
     }
   }
 }
