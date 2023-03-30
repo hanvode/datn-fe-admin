@@ -13,6 +13,7 @@ import {
 } from "../../components/validate/ValidateForm";
 import NotFound from "../notFound/NotFound";
 import { API_URL } from "../../hooks/config";
+import UploadVideo from "../../components/uploadVideo/UploadVideo";
 
 const EditHotel = () => {
   const location = useLocation();
@@ -47,9 +48,12 @@ const EditHotel = () => {
     if (input.checked) {
       const state = [...filterGenre, input.value];
       setFilterGenre(state);
+      console.log(filterGenre)
     } else {
       const state = filterGenre.filter((val) => val !== input.value);
       setFilterGenre(state);
+      console.log(filterGenre)
+
     }
   };
   const handleClick = async (e) => {
@@ -58,6 +62,7 @@ const EditHotel = () => {
       let newHotel = {
         ...infoHotel,
         genre: filterGenre,
+        photos: urlVideo,
       };
       if (files !== "") {
         const list = await Promise.all(
@@ -75,10 +80,10 @@ const EditHotel = () => {
             return url;
           })
         );
-        newHotel = {
-          ...infoHotel,
-          photos: list,
-        };
+        // newHotel = {
+        //   ...infoHotel,
+        //   photos: list,
+        // };
       }
       let inputArr = [
         e.target.form[1],
@@ -95,7 +100,7 @@ const EditHotel = () => {
         if (!checkRequired(inputArr, inputClassName)) {
           if (!checkNumber(e.target.form[7], 5000, inputClassName)) {
             await axios.put(`${API_URL}/hotel/${id}`, newHotel);
-            navigate(`/hotel/${id}`);
+            // navigate(`/hotel/${id}`);
           }
         }
       } catch (error) {
@@ -105,7 +110,25 @@ const EditHotel = () => {
       console.log(error);
     }
   };
+  const [urlVideo, setUrlVideo] = useState([]);
+  const [error1, updateError1] = useState();
 
+  /**
+   * handleOnUpload
+   */
+
+  function handleOnUpload(error, result, widget) {
+    if (error) {
+      updateError1(error);
+      widget.close({
+        quiet: true,
+      });
+      return;
+    }
+    // updateUrl(prev => [...prev, result?.info?.secure_url]);
+    console.log(result?.info?.secure_url);
+    setUrlVideo((prev) => [...prev, result?.info?.secure_url]);
+  }
   return (
     <div className="editHotel">
       <Sidebar />
@@ -248,6 +271,17 @@ const EditHotel = () => {
                 )}
                 <button onClick={handleClick}>Update</button>
               </form>
+            </div>
+            <div className="uploadVideo">
+              <UploadVideo onUpload={handleOnUpload}>
+                {({ open }) => {
+                  function handleOnClick(e) {
+                    e.preventDefault();
+                    open();
+                  }
+                  return <button onClick={handleOnClick}>Upload video</button>;
+                }}
+              </UploadVideo>
             </div>
           </div>
         ) : (
